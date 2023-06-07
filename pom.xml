@@ -23,7 +23,7 @@
 		<mysql.version>8.0.33</mysql.version>
 		<mybatis.spring.boot.version>2.3.1</mybatis.spring.boot.version>
 		<!-- json Serialization deserialization -->
-		<alibaba.fastjson.version>1.2.83</alibaba.fastjson.version>
+		<!--<alibaba.fastjson.version>1.2.83</alibaba.fastjson.version>-->
 		<jackson.version>2.13.5</jackson.version>
 		<!--pdf /poi  version-->
 		<itext.version>7.2.5</itext.version>
@@ -96,11 +96,13 @@
 				<version>${jackson.version}</version>
 				<type>pom</type>
 			</dependency>
+			<!--
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
 				<version>${alibaba.fastjson.version}</version>
 			</dependency>
+			-->
 			<!-- mysql -->
 			<dependency>
 				<groupId>mysql</groupId>
