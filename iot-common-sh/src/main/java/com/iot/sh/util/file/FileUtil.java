@@ -23,6 +23,7 @@ import java.util.zip.ZipOutputStream;
  *
  */
 public class FileUtil {
+	private FileUtil(){}
 	/**
 	 * @param path 递归删除文件夹或文件
 	 */

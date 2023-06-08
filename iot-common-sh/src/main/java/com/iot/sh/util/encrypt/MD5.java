@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class MD5 {	
-
+	private MD5(){}
 	private final static String[] hexDigits = { "0", "1", "2", "3", "4", "5",
 			"6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
 
@@ -71,13 +71,12 @@ public class MD5 {
 			byte[] b = md.digest();						
 			return byteFileToHex(b);
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			log.error(ex.getMessage(),ex);
 			return null;
 		} finally {
 			try {
 				stream.close();
 			} catch (IOException ex) {
-				ex.printStackTrace();
 			}
 		}
 	}

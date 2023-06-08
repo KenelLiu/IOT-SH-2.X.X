@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
  */
 @Slf4j
 public class EntityUtil {
-
+    private EntityUtil(){}
     /**
      * @param entity 实体类
      * @param fieldName 字段名

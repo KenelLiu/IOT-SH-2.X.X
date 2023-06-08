@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 public class XmlUtil {
 	  private static final String PRE_FIX_UTF = "&#x";
 	  private static final String POS_FIX_UTF = ";";
+	  private XmlUtil(){}
+
 	  public static String encode(String strTmp){		  
 		    if ((strTmp == null) || (strTmp.equals(""))) {
 		      return "";

@@ -3,6 +3,7 @@ import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.digests.SHA1Digest;
 import org.bouncycastle.util.encoders.Hex;
 public class SHA {
+	private SHA(){}
 	/**
 	 * 
 	 * @param arg 待加密字符

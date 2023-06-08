@@ -10,6 +10,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 public class AES {
+	private AES(){}
 	/**
 	 * 密钥算法
 	 */

@@ -7,7 +7,8 @@ package com.iot.sh.util.common;
  *
  */
 public class StringUtil{
-  
+  private StringUtil(){}
+
   public static boolean isNotEmpty(CharSequence charSeq){
     return !isEmpty(charSeq);
   }

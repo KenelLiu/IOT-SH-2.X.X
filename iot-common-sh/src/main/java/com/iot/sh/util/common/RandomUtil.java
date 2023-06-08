@@ -8,7 +8,7 @@ import java.util.Random;
  *
  */
 public class RandomUtil {
-
+	private RandomUtil(){}
 	/**
 	 * 
 	 * @param length

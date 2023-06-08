@@ -9,6 +9,7 @@ import java.util.UUID;
  *
  */
 public class UUidGenerator {
+	private UUidGenerator(){}
 	  /** The byte array of a UUID should be 16 */ 
 	public static final int BYTE_LENGTH = 16;
 	private static final int shiftWidth = 8;

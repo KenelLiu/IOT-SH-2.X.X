@@ -37,7 +37,7 @@ import org.apache.commons.codec.binary.Base64;
 public class RSA {
     public static final String KEY_ALGORITHM = "RSA";
     public static final String SIGNATURE_ALGORITHM = "MD5withRSA";
-            
+    private  RSA(){}
     /**
      * BASE64解密
      * @param key

@@ -34,6 +34,5 @@ public class ToolsConstants {
 	public static class Byte{
 		public final static int maxSize=2048;
 		public final static int defaultSize=1024;
-		public final static int minSize=512;
 	}
 }

@@ -14,7 +14,9 @@ import java.util.zip.ZipOutputStream;
 public class Zipper {
 	public static final int BUFFER_SIZE = ToolsConstants.Byte.defaultSize;
     public static final String ZIP_ENTRY_NAME = "zipped_object";
-    /**
+
+	private Zipper(){}
+	/**
      * 
      * @param src 源二进制数组
      * @return    压缩后字节数组

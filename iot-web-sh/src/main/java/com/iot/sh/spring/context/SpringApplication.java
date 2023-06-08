@@ -10,4 +10,5 @@ public  abstract  class SpringApplication extends SpringBootServletInitializer{
     protected   void initBeforeRunSpring(BeforeSpringConfig beforeSpringConfig){
         BeforeSpringManager.getInstance().setBeforeSpringConfig(beforeSpringConfig);
     }
+
 }

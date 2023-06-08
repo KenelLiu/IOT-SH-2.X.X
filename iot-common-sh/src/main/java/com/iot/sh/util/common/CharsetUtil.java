@@ -17,6 +17,8 @@ import java.nio.charset.Charset;
 @Slf4j
 public class CharsetUtil{
 
+  private  CharsetUtil(){}
+
   public static boolean isGBK(char c){
     Character ch = new Character(c);
     String sCh = ch.toString();

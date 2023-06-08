@@ -7,15 +7,13 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.security.Security;
 import java.util.Arrays;
-
-
 /**
  * 
  * @author KenelLiu
  *
  */
 public class Sm4Util {
-
+    private  Sm4Util(){}
     static {
         Security.addProvider(new BouncyCastleProvider());
     }

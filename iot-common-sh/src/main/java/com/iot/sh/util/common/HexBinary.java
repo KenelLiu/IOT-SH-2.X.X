@@ -3,7 +3,7 @@ package com.iot.sh.util.common;
 public class HexBinary {
 
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
-
+    private HexBinary(){}
     public static String bytes2Hex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
         for (int j = 0; j < bytes.length; j++) {

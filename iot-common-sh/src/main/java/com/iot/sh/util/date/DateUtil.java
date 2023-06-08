@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class DateUtil {
-
+    private DateUtil(){}
 
     public static Date getTimestamp(String fmtDateTime,String fmt) throws ParseException {
         String timeZone="Asia/Shanghai";

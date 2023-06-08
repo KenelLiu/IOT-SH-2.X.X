@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 public class CalendarUtil {
+	private CalendarUtil(){}
 	/**
 	 * 获取当前日期所属的月份的第一天的日期
 	 * @param date

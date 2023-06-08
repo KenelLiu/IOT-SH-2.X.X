@@ -5,6 +5,7 @@ import com.iot.sh.constants.ToolsConstants;
 import java.io.*;
 
 public class StreamUtil {
+	private StreamUtil(){}
 
 	public static byte[] readStream(InputStream in) throws IOException{
 		return readStream(in,true);

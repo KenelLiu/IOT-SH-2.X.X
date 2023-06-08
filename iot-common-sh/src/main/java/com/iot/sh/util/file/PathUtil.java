@@ -7,6 +7,8 @@ import java.io.IOException;
  * @author Kenel Liu
  */
 public class PathUtil {
+    private PathUtil(){}
+
     public static String getFilePath(String path) throws IOException {
         return getFilePath(null,path);
     }
