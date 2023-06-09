@@ -96,6 +96,11 @@
 				<version>${jackson.version}</version>
 				<type>pom</type>
 			</dependency>
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>${io.jsonwebtoken.version}</version>
+			</dependency>
 			<!--
 			<dependency>
 				<groupId>com.alibaba</groupId>

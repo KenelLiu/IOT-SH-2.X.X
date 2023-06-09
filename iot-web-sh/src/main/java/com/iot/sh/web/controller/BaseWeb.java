@@ -2,6 +2,8 @@ package com.iot.sh.web.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iot.sh.spring.config.UploadConfig;
+import com.iot.sh.util.file.PathUtil;
 import com.iot.sh.util.jackson.JsonObjectUtil;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.iot.sh.constants.IOTConstants;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -23,7 +26,8 @@ import java.io.InputStreamReader;
 public class BaseWeb<T> {
     @Autowired
     protected HttpServletRequest request;
-
+    @Autowired
+    protected UploadConfig uploadConfig;
     protected T getSessionUser(){
         T user=(T)(getHttpSession().getAttribute(IOTConstants.Session.Session_User));
         if(user==null)
@@ -124,5 +128,20 @@ public class BaseWeb<T> {
         }finally{
             try{if(bufferReader!=null) bufferReader.close();}catch(Exception ex){}
         }
+    }
+
+    protected String getFileRootPath(){
+        String path=uploadConfig.getPath();
+        try{
+            if(path==null || path.startsWith("./")){
+                path=PathUtil.getFilePath(path);
+            }else{
+                path=PathUtil.getFilePath(path,null);
+            }
+            return path;
+        }catch (IOException ex){
+            log.error(ex.getMessage(),ex);
+        }
+        return path;
     }
 }

@@ -51,7 +51,6 @@ public class HttpClient {
 
 	private String body = null;
 
-	private HttpHost httpHost = null;
 
 	public HttpClient() {
 		this(null,METHOD_POST);
@@ -142,12 +141,8 @@ public class HttpClient {
 		Object response = null;
 		try {
 			setRequestParam();	
-			this.httpClient = HttpUtil.getHttpClient();	
-			if (this.httpHost != null)
-				response = this.httpClient.execute(this.httpHost,this.httpRequest, handler);
-			else 
-				response = this.httpClient.execute(this.httpRequest, handler);
-			
+			this.httpClient = HttpUtil.getHttpClient();
+			response = this.httpClient.execute(this.httpRequest, handler);
 			return (T)response;
 		} catch (Exception e) {			
 			if(httpRequest!=null){try{httpRequest.abort();}catch(Exception em){}}
@@ -223,9 +218,6 @@ public class HttpClient {
 		}
 	}
 
-	public void setProxy(String url, int port) {
-		this.httpHost = new HttpHost(url, port);
-	}
 
 	private class HTTPResponse implements ResponseHandler<FileHttpResponse>{
 		private OutputStream outStream;
