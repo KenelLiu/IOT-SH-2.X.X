@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.iot.sh</groupId>
-		<artifactId>IOT-Parent</artifactId>
-		<version>1.0</version>
+		<artifactId>iot-parent</artifactId>
+		<version>1.0.0</version>
 	</parent>
     <artifactId>iot-example-spring-boot-jwt</artifactId>
 	<packaging>jar</packaging>

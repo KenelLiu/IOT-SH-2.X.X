@@ -47,3 +47,5 @@ nohup java -Xms1024m -Xmx2048m -XX:+UseCodeCacheFlushing -XX:+UseG1GC  -XX:Reser
 #FGCT: 从应用程序启动到采样时 Full GC 所用的时间（单位秒）
 #GCT: 从应用程序启动到采样时垃圾回收所用的总时间（单位秒）
 #其中，M 表示元数据区已使用内存比例，CCS 表示压缩类空间已使用内存比例。元数据区主要用来存储类的元数据信息，如类名、方法名、字段名等。压缩类空间则是一种针对类元数据的内存压缩技术，可以有效地降低 JVM 的内存占用
+
+#jmap -dump:format=b,file=hprof 进程PID

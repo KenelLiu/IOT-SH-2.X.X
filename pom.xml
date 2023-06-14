@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.iot.sh</groupId>
-	<artifactId>IOT-Parent</artifactId>
-	<version>1.0</version>
+	<artifactId>iot-parent</artifactId>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 		
 	<name>IOT-Parent</name>
@@ -14,7 +14,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<iot.sh.version>1.0</iot.sh.version>
+		<iot.sh.version>1.0.0</iot.sh.version>
 		<!--  spring framework version -->
 		<spring.framework.version>5.3.27</spring.framework.version>
 		<spring.boot.version>2.7.12</spring.boot.version>
@@ -56,9 +56,12 @@
 	<modules>
 		<module>iot-common-sh</module>
         <module>iot-web-sh</module>
-		<module>iot-sso-sh</module>		
-		<module>iot-example-spring-boot</module>
+		<module>iot-sso-sh</module>
+		<!--exmaple-->
 		<module>iot-example-generate-mybatis</module>
+		<module>iot-example-spring-boot</module>
+		<module>iot-example-spring-boot-jwt</module>
+		<module>iot-example-spring-boot-reactor</module>
 	</modules>
 	
 	<dependencyManagement>
