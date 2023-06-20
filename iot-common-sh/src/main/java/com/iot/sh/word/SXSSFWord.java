@@ -50,7 +50,7 @@ public class SXSSFWord {
             os=new FileOutputStream(outputFile);
             doc.write(os);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(),e);
             throw new OpenXML4JException("key:"+text+";"+e.getMessage(),e);
         }finally{
             if(os!=null)try{os.close();}catch(Exception ex){}

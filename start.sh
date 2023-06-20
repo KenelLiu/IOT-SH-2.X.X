@@ -1,4 +1,4 @@
-nohup java -Xms1024m -Xmx2048m -XX:+UseCodeCacheFlushing -XX:+UseG1GC  -XX:ReservedCodeCacheSize=512m -XX:MaxMetaspaceSize=256m -Dspring.config.location=file:./application.yml -jar assess-1.0.jar &
+nohup java -Xms4g -Xmx4g -XX:+UseCodeCacheFlushing -XX:+UseG1GC -XX:ReservedCodeCacheSize=768m -XX:MetaspaceSize=640m -XX:MaxMetaspaceSize=640m -Dspring.config.location=file:./application.yml -jar assess-1.0.jar
 # -XX:MetaspaceSize=128m：元空间默认大小
 # -XX:MaxMetaspaceSize=256m：元空间最大大小
 # -XX:InitialHeapSize：指定 JVM 最初的堆内存大小。
@@ -49,3 +49,12 @@ nohup java -Xms1024m -Xmx2048m -XX:+UseCodeCacheFlushing -XX:+UseG1GC  -XX:Reser
 #其中，M 表示元数据区已使用内存比例，CCS 表示压缩类空间已使用内存比例。元数据区主要用来存储类的元数据信息，如类名、方法名、字段名等。压缩类空间则是一种针对类元数据的内存压缩技术，可以有效地降低 JVM 的内存占用
 
 #jmap -dump:format=b,file=hprof 进程PID
+
+#jstat -gcmetacapacity <pid>
+#MCMN（Metaspace Capacity Min）：表示 Metaspace 区域的最小容量。如果 Metaspace 区域的使用量低于此值，JVM 不会减少 Metaspace 区域的容量。
+#MCMX（Metaspace Capacity Max）：表示 Metaspace 区域的最大容量。如果 Metaspace 区域的使用量超过此值，JVM 会自动增加 Metaspace 区域的容量。
+#MC（Metacapacity）：表示 Metaspace 区域的当前容量。如果 Metaspace 区域的使用量接近此值，JVM 可能会增加 Metaspace 区域的容量。
+#CCSMN（Compressed Class Space Minimum）：表示压缩类空间的最小容量。
+#CCSMX（Compressed Class Space Maximum）：表示压缩类空间的最大容量。
+#CCSC（Compressed Class Space Current）：表示压缩类空间的当前容量。如果压缩类空间的使用量接近此值，JVM 可能会增加压缩类空间的容量。
+#需要注意的是，Metaspace 区域和压缩类空间是虚拟机的一部分，用于存储类和元数据信息。这些区域的容量和使用情况直接影响 JVM 的性能和稳定性。
