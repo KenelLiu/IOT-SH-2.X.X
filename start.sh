@@ -1,4 +1,21 @@
-nohup java -Xms4g -Xmx4g -XX:+UseCodeCacheFlushing -XX:+UseG1GC -XX:ReservedCodeCacheSize=768m -XX:MetaspaceSize=640m -XX:MaxMetaspaceSize=640m -Dspring.config.location=file:./application.yml -jar assess-1.0.jar
+# 设置进程名关键词
+process_keyword="file:./application.yml -jar assess-1.0.jar"
+# 获取与关键词匹配的 Java 进程 ID
+pid=$(ps -ef | grep java | grep "$process_keyword" | grep -v "grep" | awk '{print $2}')
+# 判断进程 ID 是否存在
+if [ -z "$pid" ]
+  then
+    echo "Java process with keyword \"$process_keyword\" is not running"
+  else
+    # 杀死进程
+    kill -9 $pid
+    echo "Java process with pid $pid and keyword \"$process_keyword\" has been stopped"
+fi
+
+# 重启 Java 应用程序
+nohup java -Xms4g -Xmx4g -XX:+UseCodeCacheFlushing -XX:+UseG1GC -XX:ReservedCodeCacheSize=768m -XX:MetaspaceSize=640m -XX:MaxMetaspaceSize=640m -Dspring.config.location=file:./application.yml -jar assess-1.0.jar &
+echo "Java start....."
+
 # -XX:MetaspaceSize=128m：元空间默认大小
 # -XX:MaxMetaspaceSize=256m：元空间最大大小
 # -XX:InitialHeapSize：指定 JVM 最初的堆内存大小。
