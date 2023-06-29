@@ -1,0 +1,12 @@
+server:
+  port: 8010
+logging:
+  config: ./logback-spring.xml
+
+http:
+  response:
+    headerMap:
+      Access-Control-Allow-Methods: "GET,POST,DELETE,PUT,PATCH,OPTIONS"
+      Access-Control-Allow-Credentials: "true"
+      Access-Control-Allow-Origin: "*"
+      Access-Control-Allow-Headers: "*"
