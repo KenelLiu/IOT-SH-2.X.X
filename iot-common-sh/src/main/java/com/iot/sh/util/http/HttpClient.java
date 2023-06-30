@@ -11,14 +11,15 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-
+import org.apache.http.HttpEntity;
 import java.io.*;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
@@ -28,17 +29,17 @@ import java.util.Map.Entry;
  */
 @Slf4j
 public class HttpClient {
-    public static final ContentType TEXT_PLAIN_UTF8 =ContentType.create("text/plain", Charset.forName(ToolsConstants.Encoding.CHARSET_UTF8));
+    public static final ContentType TEXT_PLAIN_UTF8 =ContentType.create("text/plain", Consts.UTF_8);;
 	//----------传输类型---------//
 	public static final int TRANSMODE_BODY = 1;//整体传输  例如SOAP xml文件 设置在body里传输
 	public static final int TRANSMODE_FORM = 2;//普通form传输  包含文件传输
+
 	//--------方法-------------//
 	public static final String METHOD_POST = "POST";
 	public static final String METHOD_PUT = "PUT";
 	public static final String METHOD_GET = "GET";
 	public static final String METHOD_DELETE = "DELETE";
-	
-	private org.apache.http.client.HttpClient httpClient;
+
 	private HttpRequestBase httpRequest;
 	private Map<String, String> headers;
 	private Map<String, File>  uploadFiles;
@@ -140,9 +141,9 @@ public class HttpClient {
 	protected  <T>T handleResponse(ResponseHandler<T> handler) {
 		Object response = null;
 		try {
-			setRequestParam();	
-			this.httpClient = HttpUtil.getHttpClient();
-			response = this.httpClient.execute(this.httpRequest, handler);
+			setRequestParam();
+			org.apache.http.client.HttpClient httpClient = HttpUtil.getHttpClient();
+			response = httpClient.execute(this.httpRequest, handler);
 			return (T)response;
 		} catch (Exception e) {			
 			if(httpRequest!=null){try{httpRequest.abort();}catch(Exception em){}}
@@ -167,43 +168,41 @@ public class HttpClient {
 				if (this.body!= null) {
 					entity=new StringEntity(this.body, ToolsConstants.Encoding.CHARSET_UTF8);
 				}
-			} else {
+			}else{
 				if(this.uploadFiles!=null){
-					//有文件传输    必须使用  MultipartEntity		 							
-					entity=entity==null?new MultipartEntity():entity;
-					if(this.uploadFiles!=null){
-						  for (Entry<String,File> entry : this.uploadFiles.entrySet()) {
-								if ((entry.getKey()  == null) || (entry.getKey().trim().equals("")))
-									continue;		
-								((MultipartEntity)entity).addPart(entry.getKey(),  new FileBody(entry.getValue()));
-							}
-					  }								
-					//设置普通一般参数 
-					for(NameValuePair pair:this.paramsList){	
-							((MultipartEntity)entity).addPart(pair.getName(), new StringBody(pair.getValue(),Charset.forName(ToolsConstants.Encoding.CHARSET_UTF8)));
+					//有文件传输    必须使用  MultipartEntity
+					MultipartEntityBuilder multipartEntityBuilder= MultipartEntityBuilder.create()
+							.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+					for (Entry<String,File> entry : this.uploadFiles.entrySet()) {
+						if ((entry.getKey()  == null) || (entry.getKey().trim().equals("")))
+							continue;
+						multipartEntityBuilder.addPart(entry.getKey(), new FileBody(entry.getValue()));
 					}
+					//设置普通一般参数
+					for(NameValuePair pair:this.paramsList){
+						multipartEntityBuilder.addPart(pair.getName(), new StringBody(pair.getValue(),TEXT_PLAIN_UTF8));
+					}
+					entity=multipartEntityBuilder.build();
 				}else{
 					//普通请求
-					entity = new UrlEncodedFormEntity(paramsList,Charset.forName(ToolsConstants.Encoding.CHARSET_UTF8));
-				}								
-				/**4.5
-				 * 
-				 *  MultipartEntityBuilder reqEntity=MultipartEntityBuilder.create();				 * 
-				 * 	reqEntity.addBinaryBody(entry.getKey(),  entry.getValue());		
-				 * 	reqEntity.addTextBody(pair.getName(),pair.getValue(),TEXT_PLAIN_UTF8);
-				 *  entity=reqEntity.build();
-				 */
+					entity = new UrlEncodedFormEntity(paramsList, StandardCharsets.UTF_8);
+				}
 			}
-			if (this.method.equals(METHOD_PUT)) {
-				this.httpRequest = new HttpPut(this.url);
-				((HttpEntityEnclosingRequestBase) this.httpRequest).setEntity(entity);
-			} else if (this.method.equals(METHOD_GET)) {
-				this.httpRequest = new HttpGet(this.url);
-			} else if (this.method.equals(METHOD_DELETE)) {
-				this.httpRequest = new HttpDelete(this.url);
-			} else {
-				this.httpRequest = new HttpPost(this.url);
-				((HttpPost)this.httpRequest).setEntity(entity);			
+			switch (this.method) {
+				case METHOD_PUT:
+					this.httpRequest = new HttpPut(this.url);
+					((HttpEntityEnclosingRequestBase) this.httpRequest).setEntity(entity);
+					break;
+				case METHOD_GET:
+					this.httpRequest = new HttpGet(this.url);
+					break;
+				case METHOD_DELETE:
+					this.httpRequest = new HttpDelete(this.url);
+					break;
+				default:
+					this.httpRequest = new HttpPost(this.url);
+					((HttpPost) this.httpRequest).setEntity(entity);
+					break;
 			}
 			if (this.headers != null) {
 				for (Entry<String,String> entry : this.headers.entrySet()) {
@@ -267,7 +266,7 @@ public class HttpClient {
 		     return tmpDirPath;
 		}
 		
-		public void download(Header header, HttpResponse response, FileHttpResponse cdoHttpResponse) throws IOException{
+		public void download(Header header, HttpResponse response, FileHttpResponse fileHttpResponse) throws IOException{
 			 InputStream inStream=null;
 			 try{						 
 				 inStream = response.getEntity().getContent();	
@@ -279,7 +278,7 @@ public class HttpClient {
 									String fileName = param.getValue();
 									if(this.outStream==null){
 										//输出到临时文件
-										outFile(inStream, fileName,cdoHttpResponse);
+										outFile(inStream, fileName,fileHttpResponse);
 									}else{
 										try{
 											//输出到指定流
@@ -308,7 +307,7 @@ public class HttpClient {
 			  String tmpDirPath=getTmpPath();
 			  FileOutputStream fileout=null;
 			  try{	   				
-	   			  String suffix=fileName.substring(fileName.lastIndexOf("."),fileName.length());
+	   			  String suffix=fileName.substring(fileName.lastIndexOf("."));
 	   			  String date=new SimpleDateFormat("yyyyMMddHHmmsss").format(new Date());
 	   		      String tempPath =tmpDirPath+"/"+fileName.substring(0,fileName.lastIndexOf("."))+"_"+date+ suffix;				    				 
 	   			  File tmpFile=new File(tempPath);
@@ -321,7 +320,7 @@ public class HttpClient {
 	         } catch (Exception e) {  
 	        	throw new IOException(e.getMessage(),e);
 	         }finally{
-	        	 if(fileout!=null)try{fileout.close();}catch(Exception ex){}        	 
+	        	 if(fileout!=null)try{fileout.close();}catch(Exception ignore){}
 	        } 	  
 		}
 		//-------------------输出文件流-----------------------//

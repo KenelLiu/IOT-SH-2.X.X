@@ -19,6 +19,11 @@
 	</repositories>
     <dependencies>
 		<dependency>
+			<groupId>com.iot.sh</groupId>
+			<artifactId>iot-common-sh</artifactId>
+			<version>${iot.sh.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -56,7 +61,7 @@
 			<artifactId>pdfbox-tools</artifactId>
 			<version>2.0.28</version>
 		</dependency>
-    </dependencies>
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
