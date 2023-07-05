@@ -2,7 +2,7 @@ package com.iot.example.spiredoc.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.iot.example.spiredoc.jackson.ObjectMappers;
+import com.iot.sh.jackson.ObjectMappers;
 import com.spire.doc.Document;
 import com.spire.doc.FileFormat;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.StringWriter;
@@ -22,12 +21,12 @@ import java.io.StringWriter;
 @RequestMapping("/spire")
 @CrossOrigin(origins = "*")
 @Slf4j
-public class Word2PdfController {
+public class Word2PdfSpireDocController {
 	@Autowired
 	protected HttpServletRequest request;
 	@RequestMapping(path= "/word2Pdf",method = {RequestMethod.GET,RequestMethod.POST}, produces = {"application/json;charset=utf-8"})
 	public String word2Pdf() {
-		ObjectMapper objectMapper=ObjectMappers.JSON_MAPPER;
+		ObjectMapper objectMapper= ObjectMappers.JSON_MAPPER;
 		ObjectNode objectNode=objectMapper.createObjectNode();
 		try {
 			String word = request.getParameter("doc");
