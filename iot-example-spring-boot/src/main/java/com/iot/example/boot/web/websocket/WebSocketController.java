@@ -2,7 +2,7 @@ package com.iot.example.boot.web.websocket;
 
 import java.util.List;
 
-import com.iot.sh.web.controller.websocket.BaseWebSocket;
+import iot.sh.web.controller.websocket.BaseWebSocket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;

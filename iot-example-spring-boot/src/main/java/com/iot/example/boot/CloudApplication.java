@@ -3,8 +3,8 @@ package com.iot.example.boot;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import com.iot.sh.spring.context.SpringBootIotApplication;
-import com.iot.sh.spring.context.SpringContextManager;
+import iot.sh.spring.context.SpringBootIotApplication;
+import iot.sh.spring.context.SpringContextManager;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.boot.CommandLineRunner;

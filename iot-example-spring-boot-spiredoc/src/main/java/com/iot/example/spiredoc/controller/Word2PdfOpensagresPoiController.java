@@ -2,7 +2,7 @@ package com.iot.example.spiredoc.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.iot.sh.jackson.ObjectMappers;
+import iot.sh.jackson.ObjectMappers;
 import com.lowagie.text.Font;
 import com.lowagie.text.pdf.BaseFont;
 import lombok.extern.slf4j.Slf4j;

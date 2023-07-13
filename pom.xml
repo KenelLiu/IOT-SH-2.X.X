@@ -3,7 +3,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.iot.sh</groupId>
+	<groupId>iot.sh</groupId>
 	<artifactId>iot-parent</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
@@ -54,9 +54,13 @@
 	</repositories>
 		-->
 	<modules>
-		<module>iot-common-sh</module>
-        <module>iot-web-sh</module>
-		<module>iot-sso-sh</module>
+		<module>iot-sh-common</module>		
+		<module>iot-sh-poi</module>
+		<module>iot-sh-pdf</module>		
+		<module>iot-sh-javacv</module>
+		<module>iot-sh-ffmpeg</module>
+        <module>iot-sh-web</module>
+		<module>iot-sh-sso</module>
 		<!--exmaple-->
 		<module>iot-example-generate-mybatis</module>
 		<module>iot-example-spring-boot</module>
@@ -104,13 +108,6 @@
 				<artifactId>jjwt</artifactId>
 				<version>${io.jsonwebtoken.version}</version>
 			</dependency>
-			<!--
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>fastjson</artifactId>
-				<version>${alibaba.fastjson.version}</version>
-			</dependency>
-			-->
 			<!-- mysql -->
 			<dependency>
 				<groupId>mysql</groupId>

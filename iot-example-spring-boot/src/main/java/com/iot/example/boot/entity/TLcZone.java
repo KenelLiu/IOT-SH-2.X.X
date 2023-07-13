@@ -1,6 +1,6 @@
 package com.iot.example.boot.entity;
 
-import com.iot.sh.entity.BaseModel;
+import iot.sh.entity.BaseModel;
 import lombok.Data;
 
 import java.util.Date;

@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 import com.iot.example.boot.entity.TLcZone;
 import com.iot.example.boot.mapper.write.LCZoneMapper;
 import com.iot.example.boot.service.LCZoneService;
-import com.iot.sh.spring.exception.BussinessException;
+import iot.sh.spring.exception.BussinessException;
 import org.springframework.stereotype.Service;
 
 @Service(value="LCZoneService")

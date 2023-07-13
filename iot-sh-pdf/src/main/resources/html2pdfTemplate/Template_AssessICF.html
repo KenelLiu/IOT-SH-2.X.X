@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>出入院评估报告</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font: 15px/1.5 STKaiti,FangSong,NSimSun;
+        }
+        .pdf{
+            width: 820px;
+            margin: 0 auto;
+        }
+        .content{
+            width: 700px;
+            text-align: center;
+            padding: 15px 0 15px 0;
+        }
+        table {
+            width: 100%;
+            background-color: #000;
+            border-collapse: separate;
+            border-spacing: 1px;
+        }
+        td{
+            background-color: #FFF;
+            padding: 0 3px;
+            height: 20px;
+            vertical-align: center;
+        }
+        thead td:nth-child(odd){
+            width: 15%;
+            text-align: center;
+        }
+        thead td:nth-child(even){
+            width: 15%;
+            color: rgb(4,15,223)
+        }
+        thead td:last-child{
+            width: auto;
+        }
+        tbody tr.title td{
+            text-align: center;
+        }
+        tbody td:first-child{
+            text-align: left;
+        }
+        tbody tr.remark td{
+            font-weight: normal;
+            text-align: center;
+        }
+        tbody tr:not(.title) td:not(:first-child){
+            color: rgb(4,15,223)
+        }
+        .title div{
+            font-size: 18px;
+            padding-top: 5px;
+        }
+        .title .sub{
+            display: flex;
+            padding: 0 10px;
+            text-align: left;
+        }
+        .title .sub div{
+            font-size: 15px;
+        }
+        .title .sub .left{
+            flex: 4;
+            color: rgb(192,0,0)
+        }
+        .title .sub .right{
+            flex: 1;
+        }
+        .title .sub .right span{
+            color: rgb(4,15,223);
+        }
+        .foot{
+            display: flex;
+            color: rgb(32,55,100);
+            text-align: left;
+            padding-top: 10px;
+            padding-left: 50px;
+        }
+        .foot .left{
+            flex: 75%;
+        }
+        .foot .left .sign{
+            padding-bottom: 5px;
+        }
+        .foot .left .sign img{
+            vertical-align: top;
+            max-width: 150px;
+        }
+        .foot .right{
+            flex: 25%;
+        }
+    </style>
+</head>
+<!--  引入字体  -->
+<body>
+<div class="pdf">
+    <div class="content">
+        <div class="title">
+            <div>江苏钟山老年康复医院</div>
+            <div>江苏省人民医院钟山康复分院</div>
+            <div>ICF入院评估表</div>
+            <div class="sub">
+                <div class="left">评估日期：2023/03/20</div>
+                <div class="right">住院天数：<span>1天</span></div>
+            </div>
+        </div>
+        <div class="main">
+            <table>
+                <thead>
+                    <tr>
+                        <td>姓&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;名</td><td>张三</td>
+                        <td>性&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;别</td><td>男</td>
+                        <td style="letter-spacing:4px;">入院时间</td><td>2023-07-07</td>
+                    </tr>
+                    <tr>
+                        <td>床&ensp;&ensp;位&ensp;&ensp;号</td><td></td>
+                        <td>年&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;龄</td><td></td>
+                        <td>住&ensp;&ensp;院&ensp;&ensp;号</td><td></td>
+                    </tr>
+                    <tr>
+                        <td style="letter-spacing:4px;">病人类别</td><td></td>
+                        <td style="letter-spacing:4px;">住院费用</td><td></td>
+                        <td style="letter-spacing:4px;">治疗费用</td><td></td>
+                    </tr>
+                    <tr>
+                        <td>学&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;历</td><td></td>
+                        <td>工&ensp;作&ensp;类&ensp;型</td><td></td>
+                        <td>身&ensp;&ensp;份&ensp;&ensp;证</td><td>320520194512162413</td>
+                    </tr>
+                    <tr>
+                        <td style="letter-spacing:4px;height:auto;">入院诊断</td>
+                        <td colspan="5" style="text-align:left;">
+                            <div>1.脑梗死（1）左侧偏瘫（2）构音障碍（3）认知障碍</div>
+                            <div>2.高血压</div>
+                            <div>3.前列腺增生</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>病&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;程</td>
+                        <td colspan="3">左侧肢体活动不利伴言语不清3月余</td>
+                        <td style="letter-spacing:4px;">治疗类型</td>
+                        <td>PT\ST\其他(针灸)</td>
+                    </tr>
+                    <tr>
+                        <td  colspan="6" style="height:5px"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="title">
+                        <td colspan="2">评估项目</td>
+                        <td>入院评估</td>
+                        <td colspan="2">备注</td>
+                        <td>评估日期</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">1.步行</td>
+                        <td>3</td>
+                        <td colspan="2">ghhtytyt</td>
+                        <td>2023-4-17 14:35:47</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">2.运动耐受功能</td>
+                        <td>5</td>
+                        <td colspan="2">运动耐受功能运动耐受功能运动耐受功能运动耐受功能运动耐受功能</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">3.排尿</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">4.关节活动功能</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">5.肌肉力量功能</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">6.执行日常事务</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">7.改变身体的基本姿势</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">8.利用设备到处移动</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">9.如厕</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">10.盥洗自身</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">11.穿脱</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">12.吃</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">13.基本人际交往</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">14.精气神</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">15.痛感</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">16.睡眠功能</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">17.情感功能</td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center">总得分</td>
+                        <td colspan="4">108</td>
+                    </tr>
+                    <tr class="remark">
+                        <td colspan="6">备注：评估单项分值存在一定偏差可能性</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="foot">
+            <div class="left">
+                <div class="sign"><span>家属签字：</span><img src="https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/f3d3572c11dfa9ec4c2735946fd0f703918fc12c.jpg"></img></div>
+                <div>签字时间：2023/7/08</div>
+            </div>
+            <div class="right">
+                评估师：XXXXX
+            </div>
+        </div>
+    </div>    
+</div>
+</body>
+</html>

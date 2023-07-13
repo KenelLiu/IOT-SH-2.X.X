@@ -1,9 +1,8 @@
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import com.iot.sh.util.file.PathUtil;
+import iot.sh.util.file.PathUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
